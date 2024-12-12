@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.codehouse</groupId>
-	<artifactId>clase08</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
-	<name>clase08</name>
+	<artifactId>ProyectoFinal</artifactId>
+	<version>1.0.1</version>
+	<name>ProyectoFinal</name>
 	<description>Mi Primer App en Spring Boot</description>
 	<url/>
 	<licenses>
@@ -49,6 +49,11 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+    <dependency>
+      <groupId>org.hibernate</groupId>
+      <artifactId>hibernate-core</artifactId>
+      <version>6.4.4.Final</version>
+    </dependency>
 	</dependencies>
 
 	<build>

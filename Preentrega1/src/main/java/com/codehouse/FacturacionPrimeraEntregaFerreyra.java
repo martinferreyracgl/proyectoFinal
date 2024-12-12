@@ -24,9 +24,9 @@ public class FacturacionPrimeraEntregaFerreyra implements CommandLineRunner {
 
     try {
       Cliente cliente1 = new Cliente();
-      cliente1.setDni(28655323);
-      cliente1.setNombre("tincho");
-      cliente1.setApellido("quirquincho");
+      cliente1.setDocnumber("28655323");
+      cliente1.setName("tincho");
+      cliente1.setLastname("quirquincho");
       this.dao.persistirCliente(cliente1);
     } catch (Exception e) {
       e.printStackTrace(System.err);

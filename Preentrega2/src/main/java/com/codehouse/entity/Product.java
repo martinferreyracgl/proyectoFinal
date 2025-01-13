@@ -1,4 +1,4 @@
-package com.codehouse.models;
+package com.codehouse.entity;
 
 import java.util.List;
 
@@ -22,7 +22,7 @@ public class Product { // Clase que representa la tabla 'products'
   @Id // Define el campo 'id' como clave primaria
   @GeneratedValue(strategy = GenerationType.IDENTITY) // Indica que el valor del campo será generado automáticamente por
                                                       // la base de datos
-  private int id; // Campo que almacena el identificador único del producto
+  private Long id; // Campo que almacena el identificador único del producto
 
   @Column(name = "description", length = 150, nullable = false) // Mapea el campo 'description' con la columna
                                                                 // 'description' de la tabla
@@ -46,7 +46,7 @@ public class Product { // Clase que representa la tabla 'products'
   /**
    * @return id
    */
-  public int getId() {
+  public Long getId() {
 
     return this.id;
   }
@@ -94,7 +94,7 @@ public class Product { // Clase que representa la tabla 'products'
   /**
    * @param id new value of {@link #getid}.
    */
-  public void setId(int id) {
+  public void setId(Long id) {
 
     this.id = id;
   }

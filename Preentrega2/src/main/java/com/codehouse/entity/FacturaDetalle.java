@@ -1,4 +1,4 @@
-package com.codehouse.models;
+package com.codehouse.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

@@ -1,4 +1,4 @@
-package com.codehouse.models;
+package com.codehouse.entity;
 
 import java.util.Date; // Importa la clase Date para trabajar con fechas
 import java.util.List; // Importa la clase List para manejar colecciones

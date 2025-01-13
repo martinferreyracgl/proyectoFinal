@@ -1,4 +1,4 @@
-package com.codehouse.models;
+package com.codehouse.entity;
 
 import java.util.List;
 
@@ -19,7 +19,7 @@ public class Cliente { // Clase que representa la tabla 'clients'
   @Id // Define el campo 'id' como clave primaria
   @GeneratedValue(strategy = GenerationType.IDENTITY) // Indica que el valor del campo será generado automáticamente por
                                                       // la base de datos
-  private int id; // Campo que almacena el identificador único del cliente
+  private Long id; // Campo que almacena el identificador único del cliente
 
   @Column(name = "name", length = 75, nullable = false) // Mapea el campo 'name' con la columna 'name' de la tabla
   private String name; // Campo que almacena el nombre del cliente
@@ -33,14 +33,14 @@ public class Cliente { // Clase que representa la tabla 'clients'
   private String docnumber; // Campo que almacena el número de documento del cliente
 
   // Define la relación uno a muchos con la clase Factura
-  @OneToMany(mappedBy = "client", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY) // Define la
+  @OneToMany(mappedBy = "client", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER) // Define la
 
   private List<Factura> facturas; // Lista de facturas asociadas al cliente
 
   /**
    * @return id
    */
-  public int getId() {
+  public Long getId() {
 
     return this.id;
   }
@@ -80,7 +80,7 @@ public class Cliente { // Clase que representa la tabla 'clients'
   /**
    * @param id new value of {@link #getid}.
    */
-  public void setId(int id) {
+  public void setId(Long id) {
 
     this.id = id;
   }

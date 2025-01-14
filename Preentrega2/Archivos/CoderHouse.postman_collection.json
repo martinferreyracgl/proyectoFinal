@@ -375,6 +375,62 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "GetFacturaById",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/facturas/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"facturas",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CrearFactura",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \r\n    \"cliente\": {\r\n        \"id\": 3\r\n    },\r\n    \"detalle\": [\r\n        {\r\n            \r\n            \"product\": {\r\n                \"id\": 2\r\n                \r\n            },\r\n            \"amount\": 44\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/facturas",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"facturas"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		}

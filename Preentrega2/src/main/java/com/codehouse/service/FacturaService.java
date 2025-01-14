@@ -8,7 +8,7 @@ import com.codehouse.model.Factura;
 
 public interface FacturaService {
 	
-	Factura obtenerFacturaPorId(Long id);
+	FacturaDTO obtenerFacturaPorId(Long id);
 	List<FacturaDTO> listarFactura();
 	Factura crearFactura(FacturaDTO facturaDTO);
 	void eliminarFactura(Long id);

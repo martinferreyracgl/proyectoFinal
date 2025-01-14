@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.codehouse.dto.ClienteDTO;
-import com.codehouse.entity.Cliente;
+import com.codehouse.model.Cliente;
 import com.codehouse.service.ClienteService;
 
 

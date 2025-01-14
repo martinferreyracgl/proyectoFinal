@@ -1,6 +1,8 @@
-package com.codehouse.entity;
+package com.codehouse.model;
 
 import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -34,7 +36,7 @@ public class Cliente { // Clase que representa la tabla 'clients'
 
   // Define la relación uno a muchos con la clase Factura
   @OneToMany(mappedBy = "client", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER) // Define la
-
+  @JsonIgnore
   private List<Factura> facturas; // Lista de facturas asociadas al cliente
 
   /**

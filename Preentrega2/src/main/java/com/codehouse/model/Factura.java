@@ -1,4 +1,4 @@
-package com.codehouse.entity;
+package com.codehouse.model;
 
 import java.util.Date; // Importa la clase Date para trabajar con fechas
 import java.util.List; // Importa la clase List para manejar colecciones
@@ -28,7 +28,7 @@ public class Factura { // Clase que representa la tabla 'Factura'
   @Id // Define el campo 'id' como clave primaria
   @GeneratedValue(strategy = GenerationType.IDENTITY) // Indica que el valor del campo será generado automáticamente por
                                                       // la base de datos
-  private int id; // Campo que almacena el identificador único de la factura
+  private Long id; // Campo que almacena el identificador único de la factura
 
   @ManyToOne // Define la relación muchos a uno con la clase Client
   @JoinColumn(name = "client_id", nullable = false) // Especifica la columna de la clave foránea en la tabla 'factura'
@@ -49,7 +49,7 @@ public class Factura { // Clase que representa la tabla 'Factura'
   /**
    * @return id
    */
-  public int getId() {
+  public Long getId() {
 
     return this.id;
   }
@@ -89,7 +89,7 @@ public class Factura { // Clase que representa la tabla 'Factura'
   /**
    * @param id new value of {@link #getid}.
    */
-  public void setId(int id) {
+  public void setId(Long id) {
 
     this.id = id;
   }

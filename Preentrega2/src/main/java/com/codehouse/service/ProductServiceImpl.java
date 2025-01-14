@@ -7,10 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.codehouse.dto.ProductDTO;
-import com.codehouse.entity.Cliente;
-import com.codehouse.entity.Product;
 import com.codehouse.exception.ClienteNotFoundexception;
 import com.codehouse.exception.ProductNotFoundexception;
+import com.codehouse.model.Cliente;
+import com.codehouse.model.Product;
 import com.codehouse.repository.ProductRepository;
 
 @Service

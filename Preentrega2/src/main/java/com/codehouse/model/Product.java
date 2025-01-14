@@ -1,6 +1,8 @@
-package com.codehouse.entity;
+package com.codehouse.model;
 
 import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -39,7 +41,7 @@ public class Product { // Clase que representa la tabla 'products'
   private double price; // Campo que almacena el precio del producto
 
   @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true) // Define la relación uno a muchos
-                                                                                    // con la clase FacturaDetalle
+  @JsonIgnore                                                                                  // con la clase FacturaDetalle
   private List<FacturaDetalle> facturaDetalles; // Lista de detalles asociados al producto
 
   // Getters y Setters

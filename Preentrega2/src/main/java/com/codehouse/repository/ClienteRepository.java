@@ -5,7 +5,7 @@ package com.codehouse.repository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.codehouse.entity.Cliente;
+import com.codehouse.model.Cliente;
 
 
 @Repository

@@ -1,4 +1,6 @@
-package com.codehouse.entity;
+package com.codehouse.model;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -24,7 +26,7 @@ public class FacturaDetalle { // Clase que representa la tabla 'invoice_details'
 
   @ManyToOne // Define la relación muchos a uno con la clase Factura
   @JoinColumn(name = "factura_id", nullable = false) // Especifica la columna de la clave foránea en la tabla
-                                                     // 'factura_detalle'
+  @JsonIgnore                                                   // 'factura_detalle'
   private Factura factura; // Campo que almacena la factura asociada al detalle
 
   @ManyToOne // Define la relación muchos a uno con la clase Product

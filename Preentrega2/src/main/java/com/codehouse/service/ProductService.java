@@ -3,7 +3,7 @@ package com.codehouse.service;
 import java.util.List;
 
 import com.codehouse.dto.ProductDTO;
-import com.codehouse.entity.Product;
+import com.codehouse.model.Product;
 
 public interface ProductService {
 	

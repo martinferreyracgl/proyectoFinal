@@ -2,7 +2,7 @@ package com.codehouse.dto;
 
 import java.util.List;
 
-import com.codehouse.entity.Factura;
+import com.codehouse.model.Factura;
 
 public class ClienteDTO {
 

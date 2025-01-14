@@ -8,9 +8,9 @@ import org.springframework.stereotype.Service;
 
 import com.codehouse.dto.ClienteDTO;
 import com.codehouse.dto.FacturaDTO;
-import com.codehouse.entity.Cliente;
-import com.codehouse.entity.Factura;
 import com.codehouse.exception.ClienteNotFoundexception;
+import com.codehouse.model.Cliente;
+import com.codehouse.model.Factura;
 import com.codehouse.repository.ClienteRepository;
 
 @Service

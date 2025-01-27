@@ -4,12 +4,11 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import com.codehouse.dto.ProductDTO;
-import com.codehouse.exception.ClienteNotFoundexception;
-import com.codehouse.exception.ProductNotFoundexception;
-import com.codehouse.model.Cliente;
 import com.codehouse.model.Product;
 import com.codehouse.repository.ProductRepository;
 
@@ -18,11 +17,11 @@ public class ProductServiceImpl implements ProductService {
 
 	@Autowired
 	private ProductRepository productRepository;
-
+	
 	@Override
 	public ProductDTO obtenerProductPorId(Long id) {
 		Product cliente = productRepository.findById(id)
-				.orElseThrow(() -> new ProductNotFoundexception("Producto no encontrado con ID: " + id));
+				.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Producto no encontrado con ID: " + id));
 		return convertirAProductDTO(cliente);
 	}
 
@@ -49,7 +48,7 @@ public class ProductServiceImpl implements ProductService {
 	@Override
 	public void eliminarProduct(Long id) {
 		var product = productRepository.findById(id)
-                .orElseThrow(() -> new ProductNotFoundexception("Producto no encontrado con ID: " + id));
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Producto no encontrado con ID: " + id));
 		productRepository.delete(product);
 
 	}
@@ -57,7 +56,7 @@ public class ProductServiceImpl implements ProductService {
 	@Override
 	public Product modificarProduct(Long id, Product productActualizado) {
 		 var productExistente = productRepository.findById(id)
-	                .orElseThrow(() -> new ProductNotFoundexception("Producto no encontrado con ID: " + id));
+	                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Producto no encontrado con ID: " + id));
 
 	        // Actualizar los campos necesarios
 		 productExistente.setPrice(productActualizado.getPrice());

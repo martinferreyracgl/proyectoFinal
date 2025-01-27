@@ -6,6 +6,6 @@ import com.codehouse.apis.models.DateCreateAtAPI;
 
 public interface DateRestApiInterface {
 	
-	public List<DateCreateAtAPI> getDateAPI();
+	public DateCreateAtAPI getDateAPI();
 
 }

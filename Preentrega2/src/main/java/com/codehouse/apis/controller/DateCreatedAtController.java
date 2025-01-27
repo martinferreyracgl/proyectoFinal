@@ -21,10 +21,10 @@ public class DateCreatedAtController {
 private DateCreatedServiceAt dateCreateAtService;
 	
 	@GetMapping(value="/", produces = {MediaType.APPLICATION_JSON_VALUE})
-	public ResponseEntity<List<DateCreateAtAPI>> getDateCreateAt()
+	public ResponseEntity<DateCreateAtAPI> getDateCreateAt()
 	{
 		try {
-			List<DateCreateAtAPI> dateCreateAtAPI = dateCreateAtService.getDateAPI();
+			DateCreateAtAPI dateCreateAtAPI = dateCreateAtService.getDateAPI();
 		return ResponseEntity.ok(dateCreateAtAPI);
 		}
 		catch(Exception e)

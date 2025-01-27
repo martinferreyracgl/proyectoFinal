@@ -12,15 +12,15 @@ import com.codehouse.apis.models.DateCreateAtAPI;
 @Component
 public class DateRestApi implements DateRestApiInterface{
 	
-	private final String BASE_URL = "https://6785a7b9f80b78923aa42062.mockapi.io/api/date/CreateAtDate";
+	private final String BASE_URL = "https://timeapi.io/api/Time/current/zone?timeZone=America/Argentina/Buenos_Aires";
 	@Autowired
 	private RestTemplate restTemplate;
 
 	@Override
-	public List<DateCreateAtAPI> getDateAPI() {
+	public DateCreateAtAPI getDateAPI() {
 		try {
 			//colocamos null por que no le enviamos nada al servicio
-			List<DateCreateAtAPI> dateRest = restTemplate.exchange(BASE_URL, HttpMethod.GET, null,List.class).getBody();
+			DateCreateAtAPI dateRest = restTemplate.exchange(BASE_URL, HttpMethod.GET, null,DateCreateAtAPI.class).getBody();
 			return dateRest;
 		}catch(Exception e)
 		{

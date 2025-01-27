@@ -4,11 +4,12 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import com.codehouse.dto.ClienteDTO;
 import com.codehouse.dto.FacturaDTO;
-import com.codehouse.exception.ClienteNotFoundexception;
 import com.codehouse.model.Cliente;
 import com.codehouse.model.Factura;
 import com.codehouse.repository.ClienteRepository;
@@ -22,7 +23,7 @@ public class ClienteServiceImpl implements ClienteService {
 	@Override
 	public ClienteDTO obtenerClientePorId(Long id) {
 		Cliente cliente = clienteRepository.findById(id)
-					.orElseThrow(() -> new ClienteNotFoundexception("Cliente no encontrado con ID: " + id));
+					.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Cliente no encontrado con ID: " + id));
 		return convertirAClienteDTO(cliente);
 	}
 	@Override
@@ -75,13 +76,13 @@ public class ClienteServiceImpl implements ClienteService {
 	@Override
 	public void eliminarCliente(Long id) {
 		var cliente = clienteRepository.findById(id)
-                .orElseThrow(() -> new ClienteNotFoundexception("Cliente no encontrado con ID: " + id));
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Cliente no encontrado con ID: " + id));
 		clienteRepository.delete(cliente);
 	}
 	@Override
 	public Cliente modificarCliente(Long id, Cliente clienteActualizado) {
 		 var clienteExistente = clienteRepository.findById(id)
-	                .orElseThrow(() -> new ClienteNotFoundexception("Cliente no encontrado con ID: " + id));
+	                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Cliente no encontrado con ID: " + id));
 
 	        // Actualizar los campos necesarios
 	        clienteExistente.setName(clienteActualizado.getName());

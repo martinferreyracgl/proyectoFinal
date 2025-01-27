@@ -1,11 +1,12 @@
 package com.codehouse.apis.service;
 
-import java.util.List;
+import java.util.Date;
 
 import com.codehouse.apis.models.DateCreateAtAPI;
 
 public interface DateCreatedServiceAt {
 	
-	List<DateCreateAtAPI> getDateAPI();
+	DateCreateAtAPI getDateAPI();
+	Date obtenerFechaActual();
 
 }

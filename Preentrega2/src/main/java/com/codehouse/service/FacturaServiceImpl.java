@@ -1,19 +1,17 @@
 package com.codehouse.service;
 
-import java.sql.Date;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
+import com.codehouse.apis.service.DateCreateAtServiceImplement;
 import com.codehouse.dto.FacturaDTO;
-import com.codehouse.exception.ClienteNotFoundexception;
-import com.codehouse.exception.FacturaNotFoundexception;
-import com.codehouse.exception.ProductNotFoundexception;
 import com.codehouse.model.Cliente;
 import com.codehouse.model.Factura;
 import com.codehouse.model.FacturaDetalle;
@@ -33,11 +31,14 @@ public class FacturaServiceImpl implements FacturaService {
 	private ClienteRepository clienteRepository;
 	@Autowired
 	private ProductRepository productRepository;
-
+	
+	@Autowired
+	private DateCreateAtServiceImplement dateService;
+	
 	@Override
 	public FacturaDTO obtenerFacturaPorId(Long id) {
 		Factura factura = facturaRepository.findById(id)
-				.orElseThrow(() -> new FacturaNotFoundexception("Factura no encontrada con ID: " + id));
+				.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Factura no encontrada con ID: " + id));
 
 		return convertToFacturaDTO(factura);
 	}
@@ -53,25 +54,23 @@ public class FacturaServiceImpl implements FacturaService {
 		
 		// Utilizo AtomicReference por que dentro de las expresiones lamba solo puedo utilizar variables final, de paso investigue un poco
 		AtomicReference<Double> total = new AtomicReference<>(0.0);
-
+		
 		// Obtener el cliente
 		Cliente cliente = clienteRepository.findById(facturaDTO.getCliente().getId())
-				.orElseThrow(() -> new ClienteNotFoundexception(
-						"Cliente no encontrado con id: " + facturaDTO.getCliente().getId() + " para facturacion"));
+				.orElseThrow(() ->new ResponseStatusException(HttpStatus.NOT_FOUND, "Cliente no encontrado con id: " + facturaDTO.getCliente().getId() + " para facturacion"));
 
 		// Crear Factura
 		Factura factura = new Factura();
 		factura.setClient(cliente);
 		// aca se va a cargar una fecha pero desde API externa... coming soon...
-		factura.setCreatedAt(Date.valueOf(LocalDate.now()));
+		factura.setCreatedAt(dateService.obtenerFechaActual());
 
 		List<String> advertencias = new ArrayList<>();
-
+		
 		// Procesar detalle de la factura
 		List<FacturaDetalle> lineas = facturaDTO.getDetalle().stream().map(facturaDetalle -> {
 			Product producto = productRepository.findById(facturaDetalle.getProduct().getId())
-					.orElseThrow(() -> new ProductNotFoundexception(
-							"Producto no encontrado para facturacion con id: " + facturaDetalle.getProduct().getId()));
+					.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Producto no encontrado para facturacion con id: " + facturaDetalle.getProduct().getId()));
 
 			// validamos stock
 			if (producto.getStock() < facturaDetalle.getAmount()) {

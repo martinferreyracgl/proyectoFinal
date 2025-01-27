@@ -1,6 +1,7 @@
 package com.codehouse.apis;
 
-import java.util.List;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpMethod;
@@ -21,10 +22,25 @@ public class DateRestApi implements DateRestApiInterface{
 		try {
 			//colocamos null por que no le enviamos nada al servicio
 			DateCreateAtAPI dateRest = restTemplate.exchange(BASE_URL, HttpMethod.GET, null,DateCreateAtAPI.class).getBody();
+			 if (dateRest == null || dateRest.getDateTime() == null) {
+	                throw new RuntimeException("Respuesta de la API es nula");
+	            }
 			return dateRest;
 		}catch(Exception e)
 		{
-			throw new RuntimeException("Error Trayendo Fecha"+e.getMessage(),e);
+			System.err.println("Error trayendo fecha de la API: " + e.getMessage());
+
+	        // Generar la fecha actual con java.util.Date
+	        Date now = new Date();
+	        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss"); // Formato similar al de la API
+	        String formattedDate = formatter.format(now);
+
+	        // Crear objeto de respuesta con la fecha generada manualmente
+	        DateCreateAtAPI localDate = new DateCreateAtAPI();
+	        localDate.setDateTime(formattedDate);  // Asignamos la fecha formateada como String
+	        localDate.setTimeZone("Local");
+
+	        return localDate;
 		}
 		
 	}

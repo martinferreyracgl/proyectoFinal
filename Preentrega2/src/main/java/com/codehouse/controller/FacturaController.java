@@ -22,6 +22,11 @@ import com.codehouse.dto.FacturaDTO;
 import com.codehouse.model.Factura;
 import com.codehouse.service.FacturaService;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.ExampleObject;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import jakarta.persistence.EntityNotFoundException;
 
 @RestController
@@ -41,6 +46,35 @@ public class FacturaController {
         return facturaService.obtenerFacturaPorId(id);
     }
 	
+	
+	@Operation(
+	        summary = "Crear una nueva factura",
+	        description = "Crea una factura nueva basada en la información proporcionada.",
+	        requestBody = @io.swagger.v3.oas.annotations.parameters.RequestBody(
+	            content = @Content(
+	                mediaType = "application/json",
+	                schema = @Schema(implementation = FacturaDTO.class),
+	                examples = @ExampleObject(
+	                    value = """
+	                    {
+	                        "cliente": { "id": 1 },
+	                        "detalle": [
+	                            { "product": { "id": 1 }, "amount": 2 }
+	                        ]
+	                    }
+	                    """
+	                )
+	            )
+	        )
+	    )
+	    @ApiResponse(
+	        responseCode = "201",
+	        description = "Factura creada exitosamente",
+	        content = @Content(
+	            mediaType = "application/json",
+	            schema = @Schema(implementation = Factura.class)
+	        )
+	    )
 	@PostMapping
 	public ResponseEntity<Factura> crearFactura(@RequestBody FacturaDTO facturaDTO)
 	{
@@ -48,6 +82,36 @@ public class FacturaController {
 	    return ResponseEntity.ok(factura);
 	}
 	
+	
+	@Operation(
+	        summary = "Modificar una factura existente",
+	        description = "Modifica una factura existente con la nueva información proporcionada.",
+	        requestBody = @io.swagger.v3.oas.annotations.parameters.RequestBody(
+	            content = @Content(
+	                mediaType = "application/json",
+	                schema = @Schema(implementation = FacturaDTO.class),
+	                examples = @ExampleObject(
+	                    value = """
+	                    {
+	                        "cliente": { "id": 3 },
+	                        "detalle": [
+	                            { "product": { "id": 3 }, "amount": 1 },
+	                            { "product": { "id": 2 }, "amount": 1 }
+	                        ]
+	                    }
+	                    """
+	                )
+	            )
+	        )
+	    )
+	    @ApiResponse(
+	        responseCode = "200",
+	        description = "Factura modificada exitosamente",
+	        content = @Content(
+	            mediaType = "application/json",
+	            schema = @Schema(implementation = Factura.class)
+	        )
+	    )
 	@PutMapping("/{id}")
 	public ResponseEntity<Factura> modificarFactura(
 			@PathVariable Long id, 
@@ -57,7 +121,7 @@ public class FacturaController {
 	}
 	
 	
-	// Endpoint para eliminar una factura por ID
+	
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> eliminarFactura(@PathVariable("id") Long idFactura) {
         try {

@@ -49,6 +49,7 @@ public class ClienteServiceImpl implements ClienteService {
 		    dto.setId(factura.getId());
 		    dto.setCreatedAt(factura.getCreatedAt());
 		    dto.setTotal(factura.getTotal());
+		    dto.setCantidadProductosVendidos(factura.getCantidadProductosVendidos());
 		    return dto;
 		}
 	@Override

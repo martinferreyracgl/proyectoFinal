@@ -72,7 +72,7 @@ public class FacturaServiceImpl implements FacturaService {
 		// Crear Factura
 		Factura factura = new Factura();
 		factura.setClient(cliente);
-		
+		// se obtiene de API externa sino funciona la API externa se devuelve con la clase Date
 		factura.setCreatedAt(dateService.obtenerFechaActual());
 
 		List<String> advertencias = new ArrayList<>();
@@ -254,6 +254,7 @@ public class FacturaServiceImpl implements FacturaService {
 		dto.setTotal(factura.getTotal());
 		dto.setCliente(factura.getClient());
 		dto.setDetalle(factura.getFacturaDetalles());
+		dto.setCantidadProductosVendidos(factura.getCantidadProductosVendidos());
 		return dto;
 	}
 }

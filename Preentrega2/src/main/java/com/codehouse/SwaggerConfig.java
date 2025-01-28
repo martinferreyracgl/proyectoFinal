@@ -16,8 +16,8 @@ public class SwaggerConfig {
     @Bean
     public OpenAPI customOpenAPI() {
         return new OpenAPI()
-                .info(new Info().title("Mi API")
-                .description("Documentación de la API")
+                .info(new Info().title("Documentacion BackEnd Sistema Facturación")
+                .description("Este sistema de facturación permite gestionar clientes, productos, y la gestión de facturas con sus respectivos detalles.")
                 .version("1.0.0"));
     }
     

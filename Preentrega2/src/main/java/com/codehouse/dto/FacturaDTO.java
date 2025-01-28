@@ -11,6 +11,7 @@ public class FacturaDTO {
 	 private Long id;
 	    private Date createdAt;
 	    private double total;
+	    private double cantidadProductosVendidos;
 	    private Cliente cliente;
 	    private List<FacturaDetalle> detalle;
 		public Long getId() {
@@ -42,6 +43,12 @@ public class FacturaDTO {
 		}
 		public void setDetalle(List<FacturaDetalle> detalle) {
 			this.detalle = detalle;
+		}
+		public double getCantidadProductosVendidos() {
+			return cantidadProductosVendidos;
+		}
+		public void setCantidadProductosVendidos(double cantidadProductosVendidos) {
+			this.cantidadProductosVendidos = cantidadProductosVendidos;
 		}
 
 }

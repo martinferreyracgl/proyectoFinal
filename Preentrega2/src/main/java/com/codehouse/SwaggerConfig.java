@@ -17,7 +17,7 @@ public class SwaggerConfig {
     public OpenAPI customOpenAPI() {
         return new OpenAPI()
                 .info(new Info().title("Documentacion BackEnd Sistema Facturación")
-                .description("Este sistema de facturación permite gestionar clientes, productos, y la gestión de facturas con sus respectivos detalles.")
+                .description("Este sistema de facturación permite gestionar clientes, productos y  facturas con sus respectivos detalles.")
                 .version("1.0.0"));
     }
     

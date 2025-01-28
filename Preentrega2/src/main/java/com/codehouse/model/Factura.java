@@ -40,6 +40,9 @@ public class Factura { // Clase que representa la tabla 'Factura'
 
   @Column(name = "total", nullable = false) // Mapea el campo 'total' con la columna 'total' de la tabla
   private double total; // Campo que almacena el total de la factura
+  
+  @Column(name = "cantidadProductosVendidos", nullable = false) // Mapea el campo 'total' con la columna 'total' de la tabla
+  private double cantidadProductosVendidos; // Campo que almacena el total de productos vendidos
 
   @OneToMany(mappedBy = "factura", cascade = CascadeType.ALL, orphanRemoval = true) // Define la relación uno a muchos
                                                                                     // con la clase FacturaDetalle
@@ -125,5 +128,13 @@ public class Factura { // Clase que representa la tabla 'Factura'
 
     this.facturaDetalles = facturaDetalles;
   }
+
+public double getCantidadProductosVendidos() {
+	return cantidadProductosVendidos;
+}
+
+public void setCantidadProductosVendidos(double cantidadProductosVendidos) {
+	this.cantidadProductosVendidos = cantidadProductosVendidos;
+}
 
 }

@@ -20,7 +20,7 @@ public class DateRestApi implements DateRestApiInterface{
 	@Override
 	public DateCreateAtAPI getDateAPI() {
 		try {
-			//colocamos null por que no le enviamos nada al servicio
+			
 			DateCreateAtAPI dateRest = restTemplate.exchange(BASE_URL, HttpMethod.GET, null,DateCreateAtAPI.class).getBody();
 			 if (dateRest == null || dateRest.getDateTime() == null) {
 	                throw new RuntimeException("Respuesta de la API es nula");

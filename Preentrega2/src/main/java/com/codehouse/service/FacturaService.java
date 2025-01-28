@@ -12,6 +12,6 @@ public interface FacturaService {
 	List<FacturaDTO> listarFactura();
 	Factura crearFactura(FacturaDTO facturaDTO);
 	void eliminarFactura(Long id);
-	Cliente modificarFactura(Long id, Factura facturaActualizado);
+	Factura modificarFactura(Long id, FacturaDTO facturaActualizadaDTO);
 
 }

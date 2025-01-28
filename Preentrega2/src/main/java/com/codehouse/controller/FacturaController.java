@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -42,6 +43,14 @@ public class FacturaController {
 	{
 		Factura factura = facturaService.crearFactura(facturaDTO);
 	    return ResponseEntity.ok(factura);
+	}
+	
+	@PutMapping("/{id}")
+	public ResponseEntity<Factura> modificarFactura(
+			@PathVariable Long id, 
+			@RequestBody FacturaDTO facturaActualizadaDTO) {
+		Factura facturaModificada = facturaService.modificarFactura(id, facturaActualizadaDTO);
+		return ResponseEntity.ok(facturaModificada);
 	}
 	
 	 @ExceptionHandler(ResponseStatusException.class)

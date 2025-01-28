@@ -115,11 +115,7 @@ public class FacturaServiceImpl implements FacturaService {
 
 	}
 
-	@Override
-	public void eliminarFactura(Long id) {
-		// TODO Auto-generated method stub
-
-	}
+	
 
 	@Override
 	@Transactional
@@ -209,6 +205,30 @@ public class FacturaServiceImpl implements FacturaService {
 	    
 	    return factura;
 	}
+
+
+	@Transactional
+	public void eliminarFactura(Long idFactura) {
+	    // Obtener la factura para eliminar
+	    Factura factura = facturaRepository.findById(idFactura)
+	            .orElseThrow(() -> new EntityNotFoundException("Factura no encontrada"));
+
+	    // Reponer el stock de los productos en los detalles de la factura
+	    for (FacturaDetalle detalle : factura.getFacturaDetalles()) {
+	        Product producto = detalle.getProduct();
+	        producto.setStock(producto.getStock() + detalle.getAmount()); // Reponer stock
+	        productRepository.save(producto);
+	    }
+
+	 // Eliminar los detalles de la factura (la cascada debería hacer esto automáticamente)
+	    factura.getFacturaDetalles().clear(); // Limpiar la lista de detalles
+	    facturaRepository.flush(); // Asegurar que los cambios se sincronicen con la base de datos
+
+	    // Eliminar la factura explícitamente
+	    facturaRepository.delete(factura); // Eliminar la factura
+	    facturaRepository.flush(); // Asegurar que la eliminación de la factura se persista en la base de datos
+	}
+
 
 
 

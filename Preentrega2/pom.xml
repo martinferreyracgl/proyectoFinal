@@ -69,6 +69,12 @@
 		    <version>2.4.0</version> <!-- Cambié la versión a 2.4.0 -->
 		</dependency>
 	
+	
+	<dependency>
+	    <groupId>org.hibernate.validator</groupId>
+	    <artifactId>hibernate-validator</artifactId>
+	    <version>7.0.0.Final</version>
+	</dependency>
 
 	</dependencies>
 

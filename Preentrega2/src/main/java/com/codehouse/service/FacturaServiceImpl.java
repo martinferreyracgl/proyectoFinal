@@ -23,7 +23,9 @@ import com.codehouse.repository.ClienteRepository;
 import com.codehouse.repository.FacturaRepository;
 import com.codehouse.repository.ProductRepository;
 
+import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityNotFoundException;
+import jakarta.persistence.PersistenceContext;
 import jakarta.transaction.Transactional;
 
 @Service
@@ -38,6 +40,9 @@ public class FacturaServiceImpl implements FacturaService {
 	
 	@Autowired
 	private DateCreateAtServiceImplement dateService;
+	
+	@PersistenceContext
+    private EntityManager entityManager;
 	
 	@Override
 	public FacturaDTO obtenerFacturaPorId(Long id) {
@@ -209,25 +214,30 @@ public class FacturaServiceImpl implements FacturaService {
 
 	@Transactional
 	public void eliminarFactura(Long idFactura) {
-	    // Obtener la factura para eliminar
+	    // 1. Recuperar la factura
 	    Factura factura = facturaRepository.findById(idFactura)
 	            .orElseThrow(() -> new EntityNotFoundException("Factura no encontrada"));
 
-	    // Reponer el stock de los productos en los detalles de la factura
+	    // 2. Actualizar el stock de los productos
 	    for (FacturaDetalle detalle : factura.getFacturaDetalles()) {
 	        Product producto = detalle.getProduct();
-	        producto.setStock(producto.getStock() + detalle.getAmount()); // Reponer stock
+	        producto.setStock(producto.getStock() + detalle.getAmount());
 	        productRepository.save(producto);
 	    }
+	    Cliente cliente = factura.getClient();
+	    cliente.getFacturas().remove(factura);
+	    
+	    factura.getFacturaDetalles().clear();
+	    factura.setClient(null);
+	    
+	    // 3. Eliminar la factura (y sus detalles por cascada)
+	    facturaRepository.delete(factura);  // Esto debería eliminar tanto la factura como los detalles
 
-	 // Eliminar los detalles de la factura (la cascada debería hacer esto automáticamente)
-	    factura.getFacturaDetalles().clear(); // Limpiar la lista de detalles
-	    facturaRepository.flush(); // Asegurar que los cambios se sincronicen con la base de datos
-
-	    // Eliminar la factura explícitamente
-	    facturaRepository.delete(factura); // Eliminar la factura
-	    facturaRepository.flush(); // Asegurar que la eliminación de la factura se persista en la base de datos
+	    
 	}
+	
+
+
 
 
 

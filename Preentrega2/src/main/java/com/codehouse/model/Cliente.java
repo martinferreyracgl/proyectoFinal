@@ -35,7 +35,7 @@ public class Cliente { // Clase que representa la tabla 'clients'
   private String docnumber; // Campo que almacena el número de documento del cliente
 
   // Define la relación uno a muchos con la clase Factura
-  @OneToMany(mappedBy = "client", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER) // Define la
+  @OneToMany(mappedBy = "client", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
   @JsonIgnore
   private List<Factura> facturas; // Lista de facturas asociadas al cliente
 

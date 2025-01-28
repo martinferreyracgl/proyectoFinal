@@ -3,6 +3,9 @@ package com.codehouse.model;
 import java.util.Date; // Importa la clase Date para trabajar con fechas
 import java.util.List; // Importa la clase List para manejar colecciones
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 /**
  * @author bizit
  *
@@ -44,8 +47,7 @@ public class Factura { // Clase que representa la tabla 'Factura'
   @Column(name = "cantidadProductosVendidos", nullable = false) // Mapea el campo 'total' con la columna 'total' de la tabla
   private double cantidadProductosVendidos; // Campo que almacena el total de productos vendidos
 
-  @OneToMany(mappedBy = "factura", cascade = CascadeType.ALL, orphanRemoval = true) // Define la relación uno a muchos
-                                                                                    // con la clase FacturaDetalle
+  @OneToMany(mappedBy = "factura", cascade = CascadeType.ALL, orphanRemoval = true) // Define la relación uno a muchos                                                                               // con la clase FacturaDetalle
   private List<FacturaDetalle> facturaDetalles; // Lista de detalles asociados a la factura
 
   // Getters and Setters

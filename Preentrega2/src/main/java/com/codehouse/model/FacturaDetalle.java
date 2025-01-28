@@ -1,9 +1,16 @@
 package com.codehouse.model;
 
+
+
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Column;
+import jakarta.persistence.ConstraintMode;
 import jakarta.persistence.Entity;
+import jakarta.persistence.ForeignKey;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -24,9 +31,10 @@ public class FacturaDetalle { // Clase que representa la tabla 'invoice_details'
                                                       // la base de datos
   private int facturaDetalleId; // Campo que almacena el identificador único del detalle de la factura
 
-  @ManyToOne // Define la relación muchos a uno con la clase Factura
-  @JoinColumn(name = "factura_id", nullable = false) // Especifica la columna de la clave foránea en la tabla
-  @JsonIgnore                                                   // 'factura_detalle'
+  @ManyToOne
+  @JoinColumn(name = "factura_id", foreignKey = @ForeignKey(name = "FK_FACTURA_DETALLE_FACTURA", value = ConstraintMode.NO_CONSTRAINT))
+  @OnDelete(action = OnDeleteAction.CASCADE)  // Esto configura la eliminación en cascada en la base de datos
+  @JsonIgnore                                                   
   private Factura factura; // Campo que almacena la factura asociada al detalle
 
   @ManyToOne // Define la relación muchos a uno con la clase Product

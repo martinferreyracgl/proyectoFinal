@@ -72,7 +72,7 @@ public class FacturaServiceImpl implements FacturaService {
 		// Crear Factura
 		Factura factura = new Factura();
 		factura.setClient(cliente);
-		// aca se va a cargar una fecha pero desde API externa... coming soon...
+		
 		factura.setCreatedAt(dateService.obtenerFechaActual());
 
 		List<String> advertencias = new ArrayList<>();
